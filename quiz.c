@@ -42,15 +42,36 @@ int main(void)
     };
     QUESTION questions[MAX_QUESTIONS];
     memcpy(questions,original_questions,sizeof(original_questions));
+    int num_questions = MAX_QUESTIONS;
     // keeping track of score
     int score = 0;
     for(int i=0;i<MAX_QUESTIONS;i++)
     {
-        int random_index = rand() % MAX_QUESTIONS;
+        int random_index = rand() % num_questions;
         QUESTION current_question = questions[random_index];
+        printf("Your score:%d/5\n",score);
         displayQuestion(current_question);
-        break;
+        int guess;
+        printf("Enter the your guess (1-4): ");
+        scanf("%d",&guess);
+        if(guess >=1 && guess<=4)
+        {
+            if (guess == current_question.correct_option)
+            {
+                printf("Correct Answer!\n");
+                score++;
+            }else
+            {
+                printf("You got the wrong answer!\nCorrect answer was %s!\n",current_question.options[current_question.correct_option-1]);
+            }
+        }else
+        {
+            printf("Please enter number in range from 1 to 4!\n");
+        }
+        questions[random_index] = questions[num_questions-1];
+        num_questions--;
     }
+    printf("Congratulations on finishing the quiz!\nYour score is %d/5.",score);
 }
 
 void displayQuestion(QUESTION question)
