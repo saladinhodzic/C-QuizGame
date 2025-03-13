@@ -56,7 +56,7 @@ int main(void)
         scanf("%d",&guess);
         if(guess >=1 && guess<=4)
         {
-            if (guess == current_question.correct_option)
+            if (checkAnswer(current_question,guess))
             {
                 printf("Correct Answer!\n");
                 score++;
