@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX_QUESTIONS 5
+const int MAX_QUESTIONS = 5;
 
 typedef struct Question
 {
@@ -23,7 +23,7 @@ int main(void)
     srand(time(NULL));
     printf("Welcome to the computer knowledge quiz!\n");
 
-    QUESTION original_questions[MAX_QUESTIONS] = {
+    QUESTION original_questions[5] = {
         {"A sort of malware computer program that keeps replicating itself and can easily get diffused into other computers through internet is known as ...",
             {"Virus","Worms","Trojans","Spyware"},
         2},
@@ -47,18 +47,16 @@ int main(void)
     for(int i=0;i<MAX_QUESTIONS;i++)
     {
         int random_index = rand() % MAX_QUESTIONS;
-        QUESTION current_question = questions[random_index];
-        displayQuestion(current_question);
-        break;
+        printf("%d",random_index);
     }
 }
 
 void displayQuestion(QUESTION question)
 {
-    printf("%s\n",question.question);
+    printf("%s",question.question);
     for(int i=0;i<4;i++)
     {
-        printf("%d. %s\n",i+1,question.options[i]);
+        printf("%d. %s",i+1,question.options[i]);
     }
 }
 
